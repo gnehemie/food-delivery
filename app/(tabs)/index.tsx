@@ -1,9 +1,12 @@
 import CartButton from "@/components/CartButton";
 import { images, offers } from "@/constants";
+import { logOut } from "@/lib/appwrite";
+import { useAuthStore } from "@/store/auth.store";
 import cn from "clsx";
-import { Link } from "expo-router";
+import { router } from "expo-router";
 import { Fragment } from "react";
 import {
+  Button,
   FlatList,
   Image,
   Pressable,
@@ -14,6 +17,8 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
+  const { fetchAuthenticatedUser } = useAuthStore();
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <FlatList
@@ -77,7 +82,14 @@ export default function Index() {
               </TouchableOpacity>
             </View>
 
-            <Link href="/sign-in">Se connecter</Link>
+            <Button
+              title="Disconnect"
+              onPress={async () => {
+                await logOut();
+                await fetchAuthenticatedUser();
+                router.push("/sign-in");
+              }}
+            />
 
             <CartButton />
           </View>

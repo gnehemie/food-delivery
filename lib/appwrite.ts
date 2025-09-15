@@ -86,3 +86,12 @@ export const getCurrentUser = async () => {
     throw new Error(error as string);
   }
 };
+
+export const logOut = async () => {
+  try {
+    await account.deleteSession("current");
+  } catch (error) {
+    console.log(error);
+    throw new Error(error as string);
+  }
+};
