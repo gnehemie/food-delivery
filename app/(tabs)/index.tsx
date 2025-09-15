@@ -1,6 +1,7 @@
 import CartButton from "@/components/CartButton";
 import { images, offers } from "@/constants";
 import cn from "clsx";
+import { Link } from "expo-router";
 import { Fragment } from "react";
 import {
   FlatList,
@@ -75,6 +76,8 @@ export default function Index() {
                 />
               </TouchableOpacity>
             </View>
+
+            <Link href="/sign-in">Se connecter</Link>
 
             <CartButton />
           </View>
