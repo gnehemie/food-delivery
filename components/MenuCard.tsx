@@ -2,8 +2,6 @@ import { MenuItem } from "@/type";
 import { Image, Platform, Text, TouchableOpacity } from "react-native";
 
 const MenuCard = ({ item: { image_url, name, price } }: { item: MenuItem }) => {
-  console.log("MenuCard Item: ", { image_url, name, price });
-
   return (
     <TouchableOpacity
       className="menu-card"

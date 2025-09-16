@@ -103,11 +103,15 @@ export const logOut = async () => {
   }
 };
 
-export const getMenu = async ({ category, query, limit = 6 }: GetMenuParams) => {
+export const getMenu = async ({
+  category,
+  query,
+  limit = 6,
+}: GetMenuParams) => {
   try {
     const queries: string[] = [];
 
-    if (category) queries.push(Query.equal("categoryId", category));
+    if (category) queries.push(Query.equal("categories", category));
     if (query) queries.push(Query.search("name", query));
     if (limit) queries.push(Query.limit(limit));
 

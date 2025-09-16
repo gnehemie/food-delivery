@@ -1,9 +1,11 @@
 import CartButton from "@/components/CartButton";
+import Filters from "@/components/Filters";
 import MenuCard from "@/components/MenuCard";
+import SearchBar from "@/components/SearchBar";
 import { getCategories, getMenu } from "@/lib/appwrite";
 import { MENUS_LIMIT } from "@/lib/constants";
 import useAppwrite from "@/lib/useAppwrite";
-import { MenuItem } from "@/type";
+import { Category, MenuItem } from "@/type";
 import cn from "clsx";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
@@ -21,7 +23,7 @@ const Search = () => {
     params: { category, query, limit: MENUS_LIMIT },
   });
 
-  // console.log("Params: ", { category, query });
+  console.log("Params: ", { category, query });
   // console.log("Data: ", JSON.stringify(data, null, 2));
 
   const { data: categories } = useAppwrite({
@@ -73,9 +75,9 @@ const Search = () => {
               <CartButton />
             </View>
 
-            <Text>Search Input</Text>
+            <SearchBar />
 
-            <Text>Filter</Text>
+            <Filters categories={categories as unknown as Category[]} />
           </View>
         )}
         ListEmptyComponent={() => !loading && <Text>No items found</Text>}
