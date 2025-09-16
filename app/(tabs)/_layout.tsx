@@ -2,7 +2,7 @@ import { images } from "@/constants";
 import { useAuthStore } from "@/store/auth.store";
 import { TabBarIconProps } from "@/type";
 import cn from "clsx";
-import { Redirect, Slot, Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import { Image, Text, View } from "react-native";
 
 export default function Layout() {
@@ -40,6 +40,15 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ focused }) => (
+            <TabBarIcon focused={focused} icon={images.search} title="Search" />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="cart"
         options={{
           title: "Cart",
@@ -61,15 +70,7 @@ export default function Layout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="search"
-        options={{
-          title: "Search",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} icon={images.search} title="Search" />
-          ),
-        }}
-      />
+
       {/* <Slot /> */}
     </Tabs>
   );
