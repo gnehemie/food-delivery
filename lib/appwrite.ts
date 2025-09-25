@@ -10,11 +10,11 @@ import {
 } from "react-native-appwrite";
 
 export const appwriteConfig = {
-  endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT!,
-  projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID!,
-  projectName: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_NAME!,
-  platform: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_PLATFORM!,
-  database: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID!,
+  endpoint: "https://fra.cloud.appwrite.io/v1",
+  projectId: "68c7e208002040f80919",
+  projectName: "food-app",
+  platform: "com.gajonedev.foodapp",
+  database: "68c7e4a200067e892505",
   userTableId: "users",
   categoriesTableId: "categories",
   menuTableId: "menu",
@@ -136,6 +136,44 @@ export const getCategories = async () => {
 
     return categories.rows;
   } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
+export const getMenuDetails = async ({ id }: { id: string }) => {
+  try {
+    const menu = await tablesDB.getRow(
+      appwriteConfig.database,
+      appwriteConfig.menuTableId,
+      id
+    );
+
+    const categories = await tablesDB.getRow(
+      appwriteConfig.database,
+      appwriteConfig.categoriesTableId,
+      menu.categories
+    );
+
+    const customizationsId = await tablesDB.listRows(
+      appwriteConfig.database,
+      appwriteConfig.menuCustomizationsTableId,
+      [Query.equal("menu", id)]
+    );
+
+    const customizations = await Promise.all(
+      customizationsId.rows.map(async (item) => {
+        const customization = await tablesDB.getRow(
+          appwriteConfig.database,
+          appwriteConfig.customizationsTableId,
+          item.customizations
+        );
+        return customization;
+      })
+    );
+
+    return { menu, categories, customizations };
+  } catch (error) {
+    console.error(error);
     throw new Error(error as string);
   }
 };

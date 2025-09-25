@@ -2,6 +2,8 @@ import CartButton from "@/components/CartButton";
 import Filters from "@/components/Filters";
 import MenuCard from "@/components/MenuCard";
 import SearchBar from "@/components/SearchBar";
+import { images } from "@/constants";
+
 import { getCategories, getMenu } from "@/lib/appwrite";
 import { MENUS_LIMIT } from "@/lib/constants";
 import useAppwrite from "@/lib/useAppwrite";
@@ -9,7 +11,7 @@ import { Category, MenuItem } from "@/type";
 import cn from "clsx";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Search = () => {
@@ -23,9 +25,6 @@ const Search = () => {
     params: { category, query, limit: MENUS_LIMIT },
   });
 
-  console.log("Params: ", { category, query });
-  // console.log("Data: ", JSON.stringify(data, null, 2));
-
   const { data: categories } = useAppwrite({
     fn: getCategories,
   });
@@ -33,8 +32,6 @@ const Search = () => {
   useEffect(() => {
     refetch({ category, query, limit: MENUS_LIMIT });
   }, [category, query]);
-
-  // console.log("Search Results:", JSON.stringify(data, null, 2));
 
   return (
     <SafeAreaView className="bg-white h-full">
@@ -63,11 +60,11 @@ const Search = () => {
             <View className="flex-between flex-row w-full">
               <View className="flex-start">
                 <Text className="small-bold uppercase text-primary">
-                  Search
+                  Recherche
                 </Text>
                 <View className="flex-start flex-row gap-x-1 mt-0.5">
                   <Text className="paragraph-semibold text-dark-100">
-                    Find your favorite food
+                    Trouvez votre plat préféré
                   </Text>
                 </View>
               </View>
@@ -80,7 +77,25 @@ const Search = () => {
             <Filters categories={categories as unknown as Category[]} />
           </View>
         )}
-        ListEmptyComponent={() => !loading && <Text>No items found</Text>}
+        ListEmptyComponent={() =>
+          !loading && (
+            <View className="flex-1 flex-col justify-center items-center gap-5 mt-10">
+              <Image
+                source={images.emptyState}
+                resizeMode="contain"
+                className="w-48 h-48"
+              />
+              <View>
+                <Text className="text-2xl text-center font-quicksand-bold text-black">
+                  Aucun plat trouvé
+                </Text>
+                <Text className="text-lg text-center font-quicksand-semibold text-gray-500 mt-2">
+                  Essayez de modifier votre recherche
+                </Text>
+              </View>
+            </View>
+          )
+        }
       />
     </SafeAreaView>
   );

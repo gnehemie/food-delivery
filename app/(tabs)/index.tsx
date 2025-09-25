@@ -1,12 +1,9 @@
 import CartButton from "@/components/CartButton";
 import { images, offers } from "@/constants";
-import { logOut } from "@/lib/appwrite";
 import { useAuthStore } from "@/store/auth.store";
 import cn from "clsx";
-import { router } from "expo-router";
 import { Fragment } from "react";
 import {
-  Button,
   FlatList,
   Image,
   Pressable,
@@ -51,7 +48,12 @@ export default function Index() {
                         !isEven ? "pl-10" : "pr-3"
                       )}
                     >
-                      <Text className="h1-bold text-white leading-tight">
+                      <Text
+                        className={cn(
+                          "h1-bold text-white leading-tight",
+                          !isEven ? "" : "text-right pr-4"
+                        )}
+                      >
                         {item.title}
                       </Text>
                       <Image
@@ -71,9 +73,9 @@ export default function Index() {
         ListHeaderComponent={() => (
           <View className="flex-between flex-row w-full my-5 px-1">
             <View className="flex-start">
-              <Text className="small-bold text-primary">DELIVER TO</Text>
+              <Text className="small-bold text-primary">LIVRAISON A</Text>
               <TouchableOpacity className="flex-center flex-row gap-x-1 mt-0.5">
-                <Text className="paragraph-bold">Croatia</Text>
+                <Text className="paragraph-bold">Bénin</Text>
                 <Image
                   source={images.arrowDown}
                   className="size-3"
@@ -82,14 +84,14 @@ export default function Index() {
               </TouchableOpacity>
             </View>
 
-            <Button
+            {/* <Button
               title="Disconnect"
               onPress={async () => {
                 await logOut();
                 await fetchAuthenticatedUser();
                 router.push("/sign-in");
               }}
-            />
+            /> */}
 
             <CartButton />
           </View>

@@ -18,7 +18,7 @@ const SignUp = () => {
   const submit = async () => {
     const { name, email, password } = form;
     if (!name || !email || !password)
-      return Alert.alert("Error", "Please fill all fields");
+      return Alert.alert("Erreur", "Veuillez remplir tous les champs");
 
     setIsSubmitting(true);
 
@@ -29,7 +29,7 @@ const SignUp = () => {
       router.replace("/");
     } catch (error: any) {
       console.log(error);
-      Alert.alert("Error", error.message);
+      Alert.alert("Erreur", error.message);
     } finally {
       setIsSubmitting(false);
     }
@@ -38,34 +38,38 @@ const SignUp = () => {
   return (
     <View className="gap-10 bg-white rounded-lg p-5 mt-5">
       <CustomInput
-        placeholder="Enter your name"
+        placeholder="Entrez votre nom complet"
         value={form.name}
         onChangeText={(text) => setForm({ ...form, name: text })}
-        label="Full name"
+        label="Nom complet"
       />
       <CustomInput
-        placeholder="Enter your email"
+        placeholder="Entrez votre email"
         value={form.email}
         onChangeText={(text) => setForm({ ...form, email: text })}
         label="Email"
         keyboardType="email-address"
       />
       <CustomInput
-        placeholder="Enter your password"
+        placeholder="Choisissez votre mot de passe"
         value={form.password}
         onChangeText={(text) => setForm({ ...form, password: text })}
-        label="Password"
+        label="Mot de passe"
         secureTextEntry
       />
 
-      <CustomButton title="Sign Up" onPress={submit} isLoading={isSubmitting} />
+      <CustomButton
+        title="S'inscrire"
+        onPress={submit}
+        isLoading={isSubmitting}
+      />
 
       <View className="flex-row justify-center items-center gap-1">
         <Text className="base-regular text-gray-100">
-          Already have an account?
+          Vous avez déjà un compte ?
         </Text>
         <Link href="/sign-in" className="base-bold text-primary underline">
-          Sign In
+          S&apos;identifier
         </Link>
       </View>
     </View>

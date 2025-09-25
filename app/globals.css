@@ -26,7 +26,7 @@
   }
 
   .cart-item {
-    @apply flex flex-row items-end justify-between mb-4 bg-white rounded-xl p-3 shadow-md shadow-dark-100/10;
+    @apply flex flex-row items-end justify-between mb-4 bg-white rounded-xl p-4 shadow-2xl shadow-dark-100/10;
   }
 
   .cart-item__image {
@@ -42,7 +42,7 @@
   }
 
   .custom-header {
-    @apply w-full flex flex-row items-center justify-between mb-10;
+    @apply w-full flex flex-row items-center justify-between mb-5;
   }
 
   .label {
@@ -58,7 +58,7 @@
   }
 
   .menu-card {
-    @apply relative py-9 px-3.5 pt-24 flex items-center justify-end bg-white shadow-md shadow-black/10 rounded-3xl;
+    @apply relative py-3 px-3.5 pt-24 flex items-center justify-end bg-white shadow-md shadow-black/10 rounded-3xl;
   }
 
   .profile-field {

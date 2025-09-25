@@ -38,7 +38,7 @@ const SearchBar = () => {
     >
       <TextInput
         placeholder="Rechercher pizzas, burgers..."
-        className="flex-1 p-4 font-quicksand-semibold"
+        className="flex-1 p-4 font-quicksand-semibold caret-white-200"
         placeholderTextColor="#A0A0A0"
         value={searchQuery}
         onChangeText={handleSearch}

@@ -20,7 +20,7 @@ const SignIn = () => {
     const { email, password } = form;
 
     if (!email || !password)
-      return Alert.alert("Error", "Please fill all fields");
+      return Alert.alert("Erreur", "Veuillez remplir tous les champs");
 
     setIsSubmitting(true);
 
@@ -40,28 +40,31 @@ const SignIn = () => {
   return (
     <View className="gap-10 bg-white rounded-lg p-5 mt-5">
       <CustomInput
-        placeholder="Enter your email"
+        placeholder="Entrez votre email"
         value={form.email}
         onChangeText={(text) => setForm({ ...form, email: text })}
         label="Email"
         keyboardType="email-address"
       />
       <CustomInput
-        placeholder="Enter your password"
+        placeholder="Entrez votre mot de passe"
         value={form.password}
         onChangeText={(text) => setForm({ ...form, password: text })}
-        label="Password"
+        label="Mot de passe"
         secureTextEntry
       />
 
-      <CustomButton title="Sign In" onPress={submit} isLoading={isSubmitting} />
-      <Link href="/">Acceuil</Link>
+      <CustomButton
+        title="Se connecter"
+        onPress={submit}
+        isLoading={isSubmitting}
+      />
       <View className="flex-row justify-center mt-5 items-center gap-1">
         <Text className="base-regular text-gray-100">
-          Don&apos;t have an account?
+          Vous n&apos;avez pas de compte ?
         </Text>
         <Link href="/sign-up" className="base-bold text-primary underline">
-          Sign Up
+          S&apos;inscrire
         </Link>
       </View>
     </View>

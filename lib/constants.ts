@@ -1,1 +1,1 @@
-export const MENUS_LIMIT = 10;
+export const MENUS_LIMIT = 20;
